@@ -11,7 +11,7 @@ export function boardReducer(state: State, action: Action): State {
           columns: []
         }]
       }
-
+ 
     case 'ADD_COLUMN':
       return {
         ...state,
@@ -54,6 +54,6 @@ export function boardReducer(state: State, action: Action): State {
       }
 
     default:
-      return state // necessário para evitar retorno void
+      return state 
   }
 }

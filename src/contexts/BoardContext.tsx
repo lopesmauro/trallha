@@ -1,20 +1,30 @@
-import React, { Children, createContext, useContext, useReducer } from "react"
+import React, { createContext, useEffect, useReducer } from "react"
 import { Action, State } from "../types"
 import { boardReducer } from "../utils/boardReducer"
+import { initialState } from "../data/initialState"
+import { saveBorderState } from "../utils/saveBorderState"
 
-const initialState: State = {
-    boards: []
+export const BoardContext = createContext<{ state: State, dispatch: React.Dispatch<Action> }>(
+    {
+        state: initialState,
+        dispatch: () => null
+    }
+)
+
+type BoardProviderProps = {
+    children: React.ReactNode
 }
 
-const BoardContext = createContext<{ state: State, dispatch: React.Dispatch<Action> }>({ state: initialState, dispatch: () => null })
-
-export function BoardProvider({children}: {children: React.ReactNode}) {
+export function BoardProvider({ children }: BoardProviderProps) {
     const [state, dispatch] = useReducer(boardReducer, initialState)
+
+    useEffect(() => {
+        saveBorderState(state)
+    }, [state])
+
     return (
-        <BoardContext.Provider value={{state, dispatch}}>
+        <BoardContext.Provider value={{ state, dispatch }}>
             {children}
         </BoardContext.Provider>
     )
 }
-
-export const usBBoardContext = () => useContext(BoardContext)
