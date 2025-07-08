@@ -3,20 +3,21 @@ import { Action, State } from "../types"
 import { boardReducer } from "../utils/boardReducer"
 import { initialState } from "../data/initialState"
 import { saveBorderState } from "../utils/saveBorderState"
+import { getInitialState } from "../utils/getInitialState"
 
 export const BoardContext = createContext<{ state: State, dispatch: React.Dispatch<Action> }>(
     {
         state: initialState,
-        dispatch: () => null
+        dispatch: () => null 
     }
 )
 
 type BoardProviderProps = {
-    children: React.ReactNode
+    children: React.ReactNode 
 }
 
 export function BoardProvider({ children }: BoardProviderProps) {
-    const [state, dispatch] = useReducer(boardReducer, initialState)
+    const [state, dispatch] = useReducer(boardReducer, getInitialState())
 
     useEffect(() => {
         saveBorderState(state)

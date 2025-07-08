@@ -4,7 +4,7 @@ export const BoardPage = () => {
         <div>
             <h1>Board</h1>
             
-            <button>+</button>
+            
         </div>
     )
 }
