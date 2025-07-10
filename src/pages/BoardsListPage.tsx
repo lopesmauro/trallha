@@ -10,7 +10,7 @@ export const BoardListPage = () => {
       dispatch({ type: "ADD_BOARD", title })
     }
   }
-
+ 
   return (
     <div className={styles.container}>
       <div className={styles.header}>

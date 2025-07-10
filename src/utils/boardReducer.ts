@@ -11,20 +11,20 @@ export function boardReducer(state: State, action: Action): State {
           columns: []
         }]
       }
- 
+
     case 'ADD_COLUMN':
       return {
         ...state,
         boards: state.boards.map(board =>
           board.id === action.boardId
             ? {
-                ...board,
-                columns: [...board.columns, {
-                  id: crypto.randomUUID(),
-                  title: action.columnTitle,
-                  cards: []
-                }]
-              }
+              ...board,
+              columns: [...board.columns, {
+                id: crypto.randomUUID(),
+                title: action.columnTitle,
+                cards: []
+              }]
+            }
             : board
         )
       }
@@ -35,26 +35,25 @@ export function boardReducer(state: State, action: Action): State {
         boards: state.boards.map(board =>
           board.id === action.boardId
             ? {
-                ...board,
-                columns: board.columns.map(column =>
-                  column.id === action.columnId
-                    ? {
-                        ...column,
-                        cards: [...column.cards, {
-                          id: crypto.randomUUID(),
-                          createdAt: new Date().toISOString(),
-                          ...action.card
-                        }]
-                      }
-                    : column
-                )
-              }
+              ...board,
+              columns: board.columns.map(column =>
+                column.id === action.columnId
+                  ? {
+                    ...column,
+                    cards: [...column.cards, {
+                      ...action.card,
+                      id: crypto.randomUUID(),
+                      createdAt: new Date().toISOString(),
+                    }]
+                  }
+                  : column
+              )
+            }
             : board
         )
       }
 
     default:
-      return state 
+      return state
   }
 }
- 
