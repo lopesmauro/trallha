@@ -12,11 +12,10 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BoardProvider>
       <BrowserRouter>
-        <Routes> 
+        <Routes>
           <Route path="board" element={<BoardListPage />} />
-          <Route path="board/:boardId" element={<BoardPage />}>
-            <Route path="card/:cardId" element={<CardPage />} />
-          </Route>
+          <Route path="board/:boardId" element={<BoardPage />} />
+          <Route path="board/:boardId/:columnId/:cardId" element={<CardPage />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>

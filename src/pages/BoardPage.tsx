@@ -63,7 +63,7 @@ export const BoardPage = () => {
                             {column.cards.map((card) => (
                                 <div key={card.id}>
                                     <p className={getStatusClass(card.status)}>
-                                        {card.title}
+                                        <a href={`/board/${boardId}/${column.id}/${card.id}`}>{card.title}</a>
                                     </p>
                                 </div>
                             ))
