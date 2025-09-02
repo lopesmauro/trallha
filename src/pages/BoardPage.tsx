@@ -45,7 +45,8 @@ export const BoardPage = () => {
 
 
     return (
-        <div className={styles.container}>
+        <div className={styles.fullBackground}>
+            <div className={styles.container}>
             <div className={styles.header}>
                 <h1 className={styles.title}>Board: {board?.title}</h1>
                 <button onClick={handleAddColumn} className={styles.button}>
@@ -75,6 +76,7 @@ export const BoardPage = () => {
                     ))}
                 </div>
             )}
+            </div>
         </div>
     )
 }
