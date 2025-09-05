@@ -1,5 +1,6 @@
-import styles from "../styles/boardsListPage.module.css"
+import styles from "../styles/boardListPage.module.css"
 import { useBoardContext } from "../utils/useBoardContext"
+import ExternalLinkIcon from "../components/ExternalLinkIcon"
 
 export const BoardListPage = () => {
   const { state, dispatch } = useBoardContext()
@@ -25,14 +26,15 @@ export const BoardListPage = () => {
       ) : (
         <div className={styles.grid}>
           {state.boards.map((board) => (
-            <div key={board.id} className={styles.card}>
-              <h2 className={styles.cardTitle}>
-                <a href={`/board/${board.id}`}>{board.title}</a>
+            <a key={board.id} className={styles.board} href={`/board/${board.id}`}>
+              <h2 className={styles.boardTitle}>
+                {board.title}
+                <ExternalLinkIcon /> 
               </h2>
-              <p className={styles.cardInfo}>
+              <p>
                 {board.columns.length} coluna{board.columns.length !== 1 && "s"}
               </p>
-            </div>
+            </a>
           ))}
         </div>
       )}

@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useBoardContext } from "../utils/useBoardContext"
-import styles from "../styles/boardsListPage.module.css"
+import styles from "../styles/boardPage.module.css"
+import ExternalLinkIcon from "../components/ExternalLinkIcon"
 
 export const BoardPage = () => {
     const { state, dispatch } = useBoardContext()
@@ -38,44 +39,47 @@ export const BoardPage = () => {
     }
 
     const getStatusClass = (status: string) => {
-        if (status === "TODO") return styles.borderTodo
-        if (status === "IN_PROGRESS") return styles.borderInProgress
-        if (status === "COMPLETE") return styles.borderComplete
+        if (status === "TODO") return styles.cardTodo
+        if (status === "IN_PROGRESS") return styles.cardInProgress
+        if (status === "COMPLETE") return styles.cardComplete
     }
 
 
     return (
         <div className={styles.fullBackground}>
             <div className={styles.container}>
-            <div className={styles.header}>
-                <h1 className={styles.title}>Board: {board?.title}</h1>
-                <button onClick={handleAddColumn} className={styles.button}>
-                    + Nova coluna
-                </button>
-            </div>
-
-            {board?.columns.length === 0 ? (
-                <p className={styles.emptyMessage}>Nenhuma coluna criada ainda.</p>
-            ) : (
-                <div className={styles.grid}>
-                    {board?.columns.map((column) => (
-                        <div key={column.id} className={styles.card}>
-                            <h2 className={styles.cardTitle}>{column.title}</h2>
-                            {column.cards.map((card) => (
-                                <div key={card.id}>
-                                    <p className={getStatusClass(card.status)}>
-                                        <a href={`/board/${boardId}/${column.id}/${card.id}`}>{card.title}</a>
-                                    </p>
-                                </div>
-                            ))
-                            }
-                            <button onClick={() => handleAddCard(column.id)} className={styles.button}>
-                                + Novo Card
-                            </button>
-                        </div>
-                    ))}
+                <div className={styles.header}>
+                    <h1 className={styles.title}>Board: {board?.title}</h1>
+                    <button onClick={handleAddColumn} className={styles.button}>
+                        + Nova coluna
+                    </button>
                 </div>
-            )}
+
+                {board?.columns.length === 0 ? (
+                    <p className={styles.emptyMessage}>Nenhuma coluna criada ainda.</p>
+                ) : (
+                    <div className={styles.grid}>
+                        {board?.columns.map((column) => (
+                            <div key={column.id} className={styles.column}>
+                                <h2 className={styles.columnTitle}>{column.title}</h2>
+                                {column.cards.map((card) => (
+                                    <div key={card.id}>
+                                        <a href={`/board/${boardId}/${column.id}/${card.id}`} className={`${getStatusClass(card.status)} ${styles.card}`}>
+                                            <h3 className={styles.cardTitle}>
+                                                {card.title}
+                                                <ExternalLinkIcon />
+                                            </h3>
+                                        </a>
+                                    </div>
+                                ))
+                                }
+                                <button onClick={() => handleAddCard(column.id)} className={styles.button}>
+                                    + Novo Card
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     )

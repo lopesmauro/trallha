@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useBoardContext } from "../utils/useBoardContext"
-import styles from "../styles/boardsListPage.module.css"
+import styles from "../styles/boardPage.module.css"
 
 
 export const CardPage = () => {
