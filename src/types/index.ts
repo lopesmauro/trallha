@@ -28,7 +28,8 @@ export type State = {
 }
 
 export type Action =
-  | { type: 'ADD_BOARD'; title: string }
-  | { type: 'ADD_COLUMN'; boardId: string; columnTitle: string }
-  | { type: 'ADD_CARD'; boardId: string; columnId: string; card: Omit<Card, 'id' | 'createdAt'> }
+    | { type: 'ADD_BOARD'; title: string }
+    | { type: 'ADD_COLUMN'; boardId: string; columnTitle: string }
+    | { type: 'ADD_CARD'; boardId: string; columnId: string; card: Omit<Card, 'id' | 'createdAt'> }
+    | { type: 'UPDATE_CARD'; boardId: string; columnId: string; cardId: string; updatedCard: Omit<Card, 'id' | 'createdAt'> }
 

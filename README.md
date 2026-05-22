@@ -1,54 +1,93 @@
-# React + TypeScript + Vite
+# Trallha
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicacao de quadro Kanban feita com React, TypeScript e Vite. O projeto permite criar boards, adicionar colunas, cadastrar cards e visualizar/editar os dados de cada card.
 
-Currently, two official plugins are available:
+A intencao principal do Trallha e explorar ao maximo as ferramentas nativas do React, como componentes, hooks, `Context` e `useReducer`, evitando bibliotecas externas de gerenciamento de estado. Os dados da aplicacao sao centralizados no contexto global e persistidos localmente, mantendo o fluxo de estado simples, explicito e proximo da base do React.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologias
 
-## Expanding the ESLint configuration
+- React 19
+- TypeScript
+- Vite
+- React Router DOM
+- CSS Modules
+- ESLint
+- Storybook
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Funcionalidades
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Listagem de boards
+- Criacao de novos boards
+- Criacao de colunas dentro de um board
+- Criacao de cards com titulo, descricao e status
+- Pagina de detalhes do card
+- Persistencia dos dados no `localStorage`
+- Estilizacao com CSS Modules
+
+## Como rodar
+
+Instale as dependencias:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Inicie o servidor de desenvolvimento:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+Depois acesse a URL exibida no terminal. Normalmente:
+
+```txt
+http://localhost:5173/
+```
+
+## Scripts
+
+```bash
+npm run dev
+```
+
+Inicia o Vite em modo desenvolvimento.
+
+```bash
+npm run build
+```
+
+Executa a checagem TypeScript e gera a build de producao.
+
+```bash
+npm run preview
+```
+
+Serve localmente a build de producao.
+
+```bash
+npm run lint
+```
+
+Executa o ESLint no projeto.
+
+```bash
+npm run storybook
+```
+
+Inicia o Storybook na porta `6006`.
+
+```bash
+npm run build-storybook
+```
+
+Gera a build estatica do Storybook.
+
+## Rotas
+
+- `/board`: lista todos os boards
+- `/board/:boardId`: exibe as colunas e cards de um board
+- `/board/:boardId/:columnId/:cardId`: exibe os detalhes de um card
+
+## Estado da aplicacao
+
+O estado principal fica no `BoardContext` e e atualizado pelo `boardReducer`. As informacoes sao salvas no `localStorage` com a chave `boardState`, permitindo manter os boards, colunas e cards depois de recarregar a pagina.
